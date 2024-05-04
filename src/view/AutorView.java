@@ -13,6 +13,7 @@ public class AutorView {
         System.out.println("Correo: "+autor.getEmail());
 
         System.out.println("Afiliacion: "+autor.getAffiliations());
+        System.out.println("Citaciones: "+autor.getCitas());
 
     }
     public void imprimirLista(List<Autor> lista){

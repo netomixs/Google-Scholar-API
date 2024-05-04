@@ -16,7 +16,7 @@ public class AutorController {
         API api=new API();
         Map<String, String> params = new HashMap<String, String>();
         params.put("engine", "google_scholar_profiles");
-        params.put("mauthors", "Tecnologico_Nacional_de_Mexico_Campus_Veracruz");
+        params.put("mauthors", "UNAM");
         params.put("num", "10");
         String response=api.get(params);
         Gson gson = new Gson();
@@ -24,13 +24,39 @@ public class AutorController {
          var listaProfiles = (ArrayList) map.get("profiles");
         List<Autor> autores=new ArrayList<>();
         for (int i = 0; i < listaProfiles.size(); i++) {
-
             Autor autor=new Autor();
             autor.fromJsonToAutor((Map) listaProfiles.get(i));
             autores.add(autor);
         }
 return autores;
     }
+
+    public void actulizar(){
+        List<Autor> lista= obtenerAutores();
+        if(lista.size()==0){
+            lista=creatListAutors();
+            for (var i:lista
+                 ) {
+                i.insertar();
+            }
+        }else {
+            for (var i:lista
+                 ) {
+                    i.eliminar();
+            }
+            lista=creatListAutors();
+            for (var i:lista
+                 ) {
+                i.insertar();
+            }
+        }
+    }
+    public List<Autor> obtenerAutores(){
+        List<Autor> autores=new ArrayList<>();
+        autores=Autor.obtenerTodos();
+        return  autores;
+    }
+
 
 
 }
