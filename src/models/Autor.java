@@ -1,6 +1,7 @@
 package models;
 
 import controllers.Conexion;
+
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,20 +35,22 @@ public class Autor {
     }
 
     public Autor() {
-this.Citas="0";
-this.Name="Nombre";
-this.Affiliations="Afiliacion";
-this.Id=0;
- this.AutorID="0";
- this.Email="Email-e";
+        this.Citas = "0";
+        this.Name = "Nombre";
+        this.Affiliations = "Afiliacion";
+        this.Id = 0;
+        this.AutorID = "0";
+        this.Email = "Email-e";
     }
 
     public void setId(int id) {
         Id = id;
     }
-    public int getId( ) {
-      return this.Id;
+
+    public int getId() {
+        return this.Id;
     }
+
     public String getAutorID() {
         return AutorID;
     }
@@ -55,7 +58,6 @@ this.Id=0;
     public void setAutorID(String autorID) {
         AutorID = autorID;
     }
-
 
     public String getName() {
         return Name;
@@ -81,6 +83,10 @@ this.Id=0;
         Email = email;
     }
 
+    /**
+     * Utiliza un mapa y navega dentro de el para inizializar los parametros del objeto
+     * @map Mapa con atributos del objeto
+     */
     public void fromJsonToAutor(Map map) {
         this.Name = (String) map.get("name");
         this.AutorID = (String) map.get("author_id");
@@ -96,6 +102,11 @@ this.Id=0;
         }
     }
 
+    /**
+     * PErmite insertar en la base de datos el objeto actual
+     * @return boolean
+     *
+     */
     public boolean insertar() {
         try {
             Connection cn = Conexion.conectar();
@@ -104,19 +115,22 @@ this.Id=0;
             consulta.setString(2, this.AutorID);
             consulta.setString(3, this.Affiliations);
             consulta.setString(4, this.Email);
-            consulta.setInt(5, (int)Double.parseDouble(this.Citas));
-            int row= consulta.executeUpdate();
+            consulta.setInt(5, (int) Double.parseDouble(this.Citas));
+            int row = consulta.executeUpdate();
             cn.close();
-            return  row>0;
+            return row > 0;
         } catch (Exception e) {
             System.out.println(e);
             return false;
         }
 
 
-
     }
-
+    /**
+     * Permite actualizar en la base de datos el objeto actual
+     * @return boolean
+     *
+     */
     public boolean actualizar() {
 
         try {
@@ -127,7 +141,7 @@ this.Id=0;
             consulta.setString(3, this.AutorID);
             consulta.setString(4, this.Affiliations);
             consulta.setString(5, this.Email);
-            consulta.setInt(6,(int) Double.parseDouble(this.Citas));
+            consulta.setInt(6, (int) Double.parseDouble(this.Citas));
             consulta.execute();
             cn.close();
             return true;
@@ -137,7 +151,11 @@ this.Id=0;
 
 
     }
-
+    /**
+     * Permite eliminar en la base de datos el objeto actual
+     * @return boolean
+     *
+     */
     public boolean eliminar() {
 
         try {
@@ -152,7 +170,11 @@ this.Id=0;
         }
 
     }
-
+    /**
+     * Permite obtener en la base de datos el objeto actual por el AutorID
+     * @return boolean
+     *
+     */
     public void obtener() {
 
         try {
@@ -174,7 +196,11 @@ this.Id=0;
         }
 
     }
-
+    /**
+     * Obtener todo los elementos de esta clase de la base de datos
+     * @return List<Autor>
+     *
+     */
     public static List<Autor> obtenerTodos() {
         List<Autor> lista = new ArrayList<>();
         try {

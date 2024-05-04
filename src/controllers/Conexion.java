@@ -11,6 +11,10 @@ import java.sql.SQLException;
  * @author netomix
  */
 public class Conexion {
+    /**
+     *
+     * @return Conexion de la base de datos
+     */
     public static Connection conectar() {
         try {
             Connection cn = DriverManager.getConnection(

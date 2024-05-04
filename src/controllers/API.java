@@ -10,7 +10,11 @@ public class API {
     private String URL ="https://serpapi.com/search?";
     private String API_KEY="aaf05056c96a086eef990e0b9b89e9a7eb45826ed14330d72006ef27a408aa33&q=biology";
 
-    //Ernesto yo te quiero mucho eres mi mejor amigo :)
+    /**
+     *
+     * @param params Parametros para la URl
+     * @return regresa la respuesta de la API
+     */
     public String get(Map<String,String> params){
         try{
             HttpClient client = HttpClient.newHttpClient();
